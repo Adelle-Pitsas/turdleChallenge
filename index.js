@@ -1,8 +1,11 @@
+// import { fetchWords } from "./api-calls";
+
 // Global Variables
 var winningWord = '';
 var currentRow = 1;
 var guess = '';
 var gamesPlayed = [];
+let words
 
 // Query Selectors
 var inputs = document.querySelectorAll('input');
@@ -20,8 +23,20 @@ var gameOverBox = document.querySelector('#game-over-section');
 var gameOverGuessCount = document.querySelector('#game-over-guesses-count');
 var gameOverGuessGrammar = document.querySelector('#game-over-guesses-plural');
 
+// FetchData
+function fetchData() { 
+  fetch('http://localhost:3001/api/v1/words')
+    .then(response => response.json())
+    .then(data => {
+      words = data;
+      setGame()
+    })
+    .catch(err => console.err(err))
+}
+
+
 // Event Listeners
-window.addEventListener('load', setGame);
+window.addEventListener('load', fetchData);
 
 for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('keyup', function() { moveToNextInput(event) });
