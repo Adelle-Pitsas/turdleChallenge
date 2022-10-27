@@ -64,10 +64,13 @@ function updateInputPermissions() {
 }
 
 function moveToNextInput(e) {
+  // console.log(e)
   var key = e.keyCode || e.charCode;
 
   if( key !== 8 && key !== 46 ) {
-    var indexOfNext = parseInt(e.target.id.split('-')[2]) + 1;
+    var indexOfNext = parseInt(e.target.id.split('-')[2]) + 1;/*this is taking the cell coordinates and making them into the index of the guess*/
+    // console.log(e.target.id)
+    // console.log(indexOfNext)
     inputs[indexOfNext].focus();
   }
 }
@@ -82,7 +85,7 @@ function clickLetter(e) {
       activeIndex = i;
     }
   }
-
+console.log(activeInput)
   activeInput.value = e.target.innerText;
   inputs[activeIndex + 1].focus();
 }
